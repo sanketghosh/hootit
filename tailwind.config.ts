@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        inter: ["Inter", "sans-serif"],
+        bricolage: ["Bricolage Grotesque", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

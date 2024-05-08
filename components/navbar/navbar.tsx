@@ -2,6 +2,7 @@ import { SearchIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import OwlIcon from "../icons/owl-icon";
+import ThemeToggle from "./theme-toggle";
 
 export default function Navbar() {
   return (
@@ -13,20 +14,23 @@ export default function Navbar() {
             alt=""
             className="size-6"
           /> */}
-          <OwlIcon className="size-6" />
           <h1 className="text-2xl font-extrabold text-primary">Hootit</h1>
         </Link>
-        <div className="flex w-1/2 items-center gap-2">
+
+        <Link href={"/search"} className="w-1/2">
           <input
             type="text"
             placeholder="Search..."
-            className="flex-1 rounded-md border-none bg-muted px-4 py-2 text-sm outline-none"
+            className="hidden w-full rounded-2xl border-none bg-secondary px-4 py-2 text-sm outline-none md:block"
           />
-          <button className="rounded-md bg-primary p-2 text-primary-foreground">
-            <SearchIcon size={19} />
-          </button>
+        </Link>
+        <button className="block md:hidden">
+          <SearchIcon />
+        </button>
+        <div className="flex items-center gap-3">
+          <Button size={"sm"}>Login</Button>
+          <ThemeToggle />
         </div>
-        <Button size={"sm"}>Login</Button>
       </div>
     </nav>
   );
