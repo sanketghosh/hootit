@@ -1,13 +1,15 @@
+// PACKAGES
 import { SearchIcon } from "lucide-react";
 import Link from "next/link";
-import { Button } from "../ui/button";
-import OwlIcon from "../icons/owl-icon";
-import ThemeToggle from "./theme-toggle";
+
+// PACKAGES
+import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/navbar/theme-toggle";
 
 export default function Navbar() {
   return (
     <nav className="w-full border-b">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3">
         <Link href={"/"} className="flex items-center gap-1">
           {/* <img
             src="https://cdn-icons-png.flaticon.com/128/1726/1726034.png"
@@ -24,12 +26,15 @@ export default function Navbar() {
             className="hidden w-full rounded-2xl border-none bg-secondary px-4 py-2 text-sm outline-none md:block"
           />
         </Link>
-        <button className="block md:hidden">
-          <SearchIcon />
-        </button>
+
         <div className="flex items-center gap-3">
-          <Button size={"sm"}>Login</Button>
+          <Link href={"/search"} className="block md:hidden">
+            <SearchIcon />
+          </Link>
           <ThemeToggle />
+          <Button size={"sm"} asChild>
+            <Link href={"/login"}>Login</Link>
+          </Button>
         </div>
       </div>
     </nav>
