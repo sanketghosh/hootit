@@ -1,40 +1,71 @@
 // PACKAGES
 import { SearchIcon } from "lucide-react";
 import Link from "next/link";
+import { useFetchLoggedInUserServer } from "@/hooks/useFetchLoggedInUserServer";
+import { logout } from "@/actions/logout-action";
 
 // PACKAGES
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/navbar/theme-toggle";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const { name } = await useFetchLoggedInUserServer();
+
   return (
     <nav className="w-full border-b">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3">
+      <div className="mx-auto flex w-full max-w-[113rem] items-center justify-between px-4 py-2">
         <Link href={"/"} className="flex items-center gap-1">
-          {/* <img
-            src="https://cdn-icons-png.flaticon.com/128/1726/1726034.png"
-            alt=""
-            className="size-6"
-          /> */}
-          <h1 className="text-2xl font-extrabold text-primary">Hootit</h1>
-        </Link>
-
-        <Link href={"/search"} className="w-1/2">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="hidden w-full rounded-2xl border-none bg-secondary px-4 py-2 text-sm outline-none md:block"
-          />
+          <h1 className="text-2xl font-extrabold text-amber-500 text-primary md:text-3xl">
+            hootit
+          </h1>
         </Link>
 
         <div className="flex items-center gap-3">
-          <Link href={"/search"} className="block md:hidden">
-            <SearchIcon />
+          <Link href={"/search"} className="">
+            <div className="flex w-full items-center gap-2 rounded-3xl border bg-secondary px-4 py-1.5 text-sm text-muted-foreground">
+              <p>Search...</p>
+              <SearchIcon size={17} />
+            </div>
           </Link>
           <ThemeToggle />
-          <Button size={"sm"} asChild>
-            <Link href={"/login"}>Login</Link>
-          </Button>
+          {name ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Avatar>
+                  <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="mr-5 max-w-40 space-y-2">
+                <DropdownMenuLabel>{name}</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href={"/my-account"} className="cursor-pointer">
+                    My Account
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="p-0">
+                  <form action={logout} className="w-full">
+                    <Button className="w-full py-1 text-sm" size={"sm"}>
+                      LogOut
+                    </Button>
+                  </form>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button size={"sm"} asChild className="text-sm">
+              <Link href={"/login"}>Login</Link>
+            </Button>
+          )}
         </div>
       </div>
     </nav>
