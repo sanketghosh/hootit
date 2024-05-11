@@ -14,7 +14,7 @@ export const LoginSchema = z.object({
 /* REGISTER FORM SCHEMA  */
 export const RegisterSchema = z
   .object({
-    name: z.string().min(1, {
+    username: z.string().min(5, {
       message: "Name is required",
     }),
     email: z.string().email({

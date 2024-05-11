@@ -6,7 +6,7 @@ export const useFetchLoggedInUserServer = async () => {
   return {
     user: session?.user,
     email: session?.user?.email,
-    name: session?.user?.name,
+    username: session?.user?.username,
     image: session?.user?.image,
     userId: session?.user?.id,
   };

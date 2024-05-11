@@ -24,7 +24,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     };
   }
 
-  const { email, name, password, confirmPassword } = validateFields.data;
+  const { email, username, password, confirmPassword } = validateFields.data;
 
   if (password !== confirmPassword) {
     return {
@@ -46,7 +46,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   // create user
   await prisma.user.create({
     data: {
-      name: name,
+      username: username,
       email: email,
       password: hashedPassword,
     },

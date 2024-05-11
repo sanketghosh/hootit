@@ -18,13 +18,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export default async function Navbar() {
-  const { name } = await useFetchLoggedInUserServer();
+  const { username } = await useFetchLoggedInUserServer();
 
   return (
     <nav className="w-full border-b">
-      <div className="mx-auto flex w-full max-w-[113rem] items-center justify-between px-4 py-2">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-2">
         <Link href={"/"} className="flex items-center gap-1">
-          <h1 className="text-2xl font-extrabold text-amber-500 text-primary md:text-3xl">
+          <h1 className="text-2xl font-extrabold text-amber-500 text-primary md:text-[26px]">
             hootit
           </h1>
         </Link>
@@ -37,15 +37,15 @@ export default async function Navbar() {
             </div>
           </Link>
           <ThemeToggle />
-          {name ? (
+          {username ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Avatar>
-                  <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+                  <AvatarFallback>{username.charAt(0)}</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="mr-5 max-w-40 space-y-2">
-                <DropdownMenuLabel>{name}</DropdownMenuLabel>
+                <DropdownMenuLabel>{username}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link href={"/my-account"} className="cursor-pointer">

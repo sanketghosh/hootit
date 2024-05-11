@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "name" TEXT,
+    "username" TEXT NOT NULL,
     "email" TEXT,
     "emailVerified" DATETIME,
     "image" TEXT,
@@ -22,6 +22,9 @@ CREATE TABLE "Account" (
     "session_token" TEXT,
     CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
